@@ -1,0 +1,40 @@
+---
+import TagList from "./TagList.astro";
+---
+
+<div class="recent-post-container">
+    <div>
+        <em>December 7, 2025</em>
+        <h3>Understanding React Server Components</h3>
+    </div>
+    <p>
+        A deep dive into React Server Components and how they're changing the
+        way we build modern web applications.
+    </p>
+    <TagList tags={["TypeScript", "React", "Frontend"]} />
+</div>
+
+<style>
+    .recent-post-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    em {
+        color: rgb(107, 114, 128);
+        font-size: 16px;
+    }
+
+    h3 {
+        color: rgb(17, 24, 39);
+    }
+    p {
+        color: rgb(75, 85, 99);
+    }
+
+    h3,
+    p {
+        margin: 0px;
+    }
+</style>

@@ -1,0 +1,71 @@
+---
+const urlPath = Astro.url.pathname;
+console.log(urlPath);
+
+const links = [
+    {
+        path: "/blog",
+        name: "Blog",
+    },
+    {
+        path: "/about",
+        name: "About",
+    },
+    {
+        path: "/contact",
+        name: "Contact",
+    },
+];
+
+const isCurrentPath = (currentPath: string) => urlPath.includes(currentPath);
+---
+
+<header>
+    <nav>
+        <a href="/">$BLOG_NAME</a>
+        <div>
+            {
+                links.map((link) => (
+                    <a
+                        href={link.path}
+                        class={
+                            isCurrentPath(link.path) ? "is-active-route" : ""
+                        }
+                    >
+                        {link.name}
+                    </a>
+                ))
+            }
+        </div>
+    </nav>
+</header>
+
+<style>
+    header {
+        border-bottom: 1px solid #eee;
+        padding: 0.5rem 0rem;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    div {
+        display: flex;
+        flex: 1;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: #4b5563;
+    }
+
+    a:hover,
+    .is-active-route {
+        font-size: 1.05rem;
+        color: black;
+        text-decoration: underline;
+    }
+</style>

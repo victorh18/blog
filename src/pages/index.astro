@@ -1,16 +1,23 @@
 ---
-
+import Greeting from "../components/Greeting.astro";
+import RecentPost from "../components/RecentPost.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+	<Greeting />
+	<hr />
+	<h2>Recent Posts</h2>
+	<div class="recent-posts-list">
+		<RecentPost />
+		<RecentPost />
+	</div>
+</BaseLayout>
+
+<style>
+	.recent-posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+</style>
