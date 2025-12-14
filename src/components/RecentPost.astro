@@ -1,17 +1,25 @@
 ---
 import TagList from "./TagList.astro";
+const { post } = Astro.props;
+const { publishDate, title, description, tags } = post.data;
 ---
 
 <div class="recent-post-container">
-    <div>
-        <em>December 7, 2025</em>
-        <h3>Understanding React Server Components</h3>
-    </div>
-    <p>
-        A deep dive into React Server Components and how they're changing the
-        way we build modern web applications.
-    </p>
-    <TagList tags={["TypeScript", "React", "Frontend"]} />
+    <a href={`/blog/${post.id}`}>
+        <div>
+            <em
+                >{
+                    new Intl.DateTimeFormat("en-US", {
+                        dateStyle: "full",
+                        timeZone: "Australia/Sydney",
+                    }).format(publishDate)
+                }</em
+            >
+            <h3>{title}</h3>
+        </div>
+        <p>{description}</p>
+    </a>
+    <TagList tags={tags.filter((tag: string) => tag.trim())} />
 </div>
 
 <style>
@@ -36,5 +44,15 @@ import TagList from "./TagList.astro";
     h3,
     p {
         margin: 0px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover p,
+    a:hover h3,
+    a:hover em {
+        color: black;
     }
 </style>

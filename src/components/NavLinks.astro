@@ -1,0 +1,47 @@
+---
+const urlPath = Astro.url.pathname;
+
+const links = [
+    {
+        path: "/blog",
+        name: "Blog",
+    },
+    {
+        path: "/about",
+        name: "About",
+    },
+    {
+        path: "/contact",
+        name: "Contact",
+    },
+];
+const isCurrentPath = (currentPath: string) => urlPath.includes(currentPath);
+---
+
+{
+    links.map((link) => (
+        <a
+            href={link.path}
+            class={
+                "nav-link " +
+                (isCurrentPath(link.path) ? "is-active-route" : "")
+            }
+        >
+            {link.name}
+        </a>
+    ))
+}
+
+<style>
+    a {
+        text-decoration: none;
+        color: #4b5563;
+    }
+
+    a:hover,
+    .is-active-route {
+        color: black;
+        text-decoration: underline;
+        font-weight: 700;
+    }
+</style>

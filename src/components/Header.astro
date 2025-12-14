@@ -1,42 +1,22 @@
 ---
-const urlPath = Astro.url.pathname;
-console.log(urlPath);
-
-const links = [
-    {
-        path: "/blog",
-        name: "Blog",
-    },
-    {
-        path: "/about",
-        name: "About",
-    },
-    {
-        path: "/contact",
-        name: "Contact",
-    },
-];
-
-const isCurrentPath = (currentPath: string) => urlPath.includes(currentPath);
+import Hamburger from "../../src/assets/footer/hamburger.svg";
+import MobileNav from "./MobileNav.astro";
+import NavLinks from "./NavLinks.astro";
 ---
 
 <header>
+    <MobileNav />
     <nav>
-        <a href="/">$BLOG_NAME</a>
-        <div>
-            {
-                links.map((link) => (
-                    <a
-                        href={link.path}
-                        class={
-                            isCurrentPath(link.path) ? "is-active-route" : ""
-                        }
-                    >
-                        {link.name}
-                    </a>
-                ))
-            }
+        <div class="brand">
+            <a href="/">$BLOG_NAME</a>
+            <span id="btnToggleDrawer">
+                <Hamburger />
+            </span>
         </div>
+        <div class="desktop-nav-links">
+            <NavLinks />
+        </div>
+        <div></div>
     </nav>
 </header>
 
@@ -44,6 +24,11 @@ const isCurrentPath = (currentPath: string) => urlPath.includes(currentPath);
     header {
         border-bottom: 1px solid #eee;
         padding: 0.5rem 0rem;
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
     }
 
     nav {
@@ -62,10 +47,67 @@ const isCurrentPath = (currentPath: string) => urlPath.includes(currentPath);
         color: #4b5563;
     }
 
-    a:hover,
+    div a:hover,
     .is-active-route {
-        font-size: 1.05rem;
         color: black;
         text-decoration: underline;
+        font-weight: 700;
+    }
+
+    .brand {
+        justify-content: flex-start;
+        font-weight: bold;
+        font-size: 1.25rem;
+        color: black;
+    }
+
+    .brand a:hover {
+        text-decoration: none;
+    }
+
+    #btnToggleDrawer {
+        display: none;
+        padding: 0px 8px;
+    }
+
+    @media (max-width: 640px) {
+        #btnToggleDrawer {
+            display: block;
+        }
+
+        .brand {
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 0px;
+            align-items: center;
+        }
+
+        .desktop-nav-links {
+            display: none;
+        }
     }
 </style>
+<script>
+    const SHOW_DRAWER_CLASS = "show-drawer";
+    const btnToggleDrawer = document.getElementById("btnToggleDrawer");
+    const backdrop = document.getElementById("backdrop");
+
+    btnToggleDrawer?.addEventListener("click", () => {
+        const drawer = document.getElementById("drawer");
+        const backdrop = document.getElementById("backdrop");
+        if (drawer?.classList.contains(SHOW_DRAWER_CLASS)) {
+            drawer.classList.remove(SHOW_DRAWER_CLASS);
+            backdrop!.style.display = "none";
+        } else {
+            drawer?.classList.add(SHOW_DRAWER_CLASS);
+            backdrop!.style.display = "block";
+        }
+    });
+
+    backdrop?.addEventListener("click", () => {
+        const drawer = document.getElementById("drawer");
+        const backdrop = document.getElementById("backdrop");
+        drawer?.classList.remove(SHOW_DRAWER_CLASS);
+        backdrop!.style.display = "none";
+    });
+</script>

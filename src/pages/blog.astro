@@ -1,11 +1,15 @@
 ---
+import { getCollection } from "astro:content";
 import RecentPost from "../components/RecentPost.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const allPosts = await getCollection("blog");
 ---
 
 <BaseLayout>
     <h1>Posts</h1>
+    <br />
     <div>
-        <RecentPost />
+        {allPosts.map((post) => <RecentPost post={post} />)}
     </div>
 </BaseLayout>

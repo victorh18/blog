@@ -1,0 +1,42 @@
+---
+import NavLinks from "./NavLinks.astro";
+---
+
+<div id="drawer">
+    <span>$BLOG_NAME</span>
+    <NavLinks />
+</div>
+<div id="backdrop"></div>
+
+<style>
+    #drawer {
+        position: fixed;
+        top: 0px;
+        left: -250px;
+        width: 220px;
+        background-color: white;
+        height: 100dvh;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        z-index: 3;
+        gap: 1rem;
+        font-size: 1.25rem;
+    }
+    span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    #backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200vw;
+        height: 200dvh;
+        background-color: black;
+        opacity: 0.3;
+        display: none;
+    }
+</style>

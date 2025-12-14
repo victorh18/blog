@@ -1,16 +1,19 @@
 ---
+import { getCollection } from "astro:content";
 import Greeting from "../components/Greeting.astro";
 import RecentPost from "../components/RecentPost.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
 ---
 
 <BaseLayout>
 	<Greeting />
 	<hr />
 	<h2>Recent Posts</h2>
+	<br />
 	<div class="recent-posts-list">
-		<RecentPost />
-		<RecentPost />
+		{posts.map((post) => <RecentPost post={post} />)}
 	</div>
 </BaseLayout>
 
