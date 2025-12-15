@@ -38,7 +38,7 @@ const { publishDate, title, description, tags } = post.data;
         color: rgb(17, 24, 39);
     }
     p {
-        color: rgb(75, 85, 99);
+        color: var(--main-text-color);
     }
 
     h3,
@@ -53,6 +53,6 @@ const { publishDate, title, description, tags } = post.data;
     a:hover p,
     a:hover h3,
     a:hover em {
-        color: black;
+        color: var(--accent-text-color);
     }
 </style>
